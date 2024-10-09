@@ -69,3 +69,4 @@ COPY ./root/ /
 RUN mkdir -p "$HOME" && chown -R 1001:0 "$APP_ROOT" && chmod -R ug+rwx "$APP_ROOT"
 WORKDIR "$HOME"
 USER 1001
+CMD ["yarn", "run", "openshift"]
