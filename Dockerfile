@@ -66,6 +66,7 @@ COPY yarn.lock ./
 
 # Install packages 
 RUN yarn install
+RUN yarn global add nodeshift
 
 COPY ./ /opt/app-root/src
 
