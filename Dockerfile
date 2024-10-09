@@ -49,8 +49,10 @@ LABEL summary="$SUMMARY" \
       maintainer="SoftwareCollections.org <sclorg@redhat.com>" \
       help="For more information visit https://github.com/sclorg/s2i-nodejs-container"
 
+RUN npm install -g yarn
+
 # nodejs-full-i18n is included for error strings
-RUN INSTALL_PKGS="yarn nodejs nodejs-nodemon nodejs-full-i18n yarn findutils tar which" && \
+RUN INSTALL_PKGS="nodejs nodejs-nodemon nodejs-full-i18n yarn findutils tar which" && \
     microdnf -y module disable nodejs && \
     microdnf -y module enable nodejs:$NODEJS_VERSION && \
     microdnf --nodocs --setopt=install_weak_deps=0 install $INSTALL_PKGS && \
