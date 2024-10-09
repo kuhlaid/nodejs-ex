@@ -1,6 +1,6 @@
 FROM registry.stage.redhat.io/ubi8/ubi-minimal:8.10
 
-EXPOSE 8080
+EXPOSE 8443
 
 # Add $HOME/node_modules/.bin to the $PATH, allowing user to make yarn scripts
 # available on the CLI without using yarn's --global installation mode
@@ -34,7 +34,7 @@ LABEL summary="$SUMMARY" \
       description="$DESCRIPTION" \
       io.k8s.description="$DESCRIPTION" \
       io.k8s.display-name="Node.js $NODEJS_VERSION Minimal" \
-      io.openshift.expose-services="8080:http" \
+      io.openshift.expose-services="8443:https" \
       io.openshift.tags="builder,$NAME,${NAME}${NODEJS_VERSION}" \
       io.openshift.s2i.scripts-url="image:///usr/libexec/s2i" \
       io.s2i.scripts-url="image:///usr/libexec/s2i" \
