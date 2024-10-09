@@ -2,7 +2,7 @@ FROM registry.stage.redhat.io/ubi8/ubi-minimal:8.10
 # might want to use httpd image instead (does not work)
 # FROM registry.stage.redhat.io/rhel9/httpd-24
 
-EXPOSE 8443
+EXPOSE 8080,8443
 
 # Add $HOME/node_modules/.bin to the $PATH, allowing user to make yarn scripts
 # available on the CLI without using yarn's --global installation mode
