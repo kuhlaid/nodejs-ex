@@ -60,7 +60,7 @@ RUN INSTALL_PKGS="nodejs nodejs-nodemon nodejs-full-i18n yarn findutils tar whic
     microdnf clean all && \
     rm -rf /mnt/rootfs/var/cache/* /mnt/rootfs/var/log/dnf* /mnt/rootfs/var/log/yum.*
 
-COPY ./public /opt/app-root/src
+COPY ./ /opt/app-root/src
 
 # Drop the root user and make the content of /opt/app-root owned by user 1001
 RUN mkdir -p "$HOME" && chown -R 1001:0 "$APP_ROOT" && chmod -R ug+rwx "$APP_ROOT"
