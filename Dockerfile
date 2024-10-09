@@ -64,17 +64,19 @@ RUN INSTALL_PKGS="nodejs nodejs-nodemon nodejs-full-i18n yarn findutils tar whic
 # COPY package*.json ./
 # COPY yarn.lock ./
 
+# Drop the root user and make the content of /opt/app-root owned by user 1001
+RUN mkdir -p "$HOME" && chown -R 1001:0 "$APP_ROOT" && chmod -R ug+rwx "$APP_ROOT"
+
 WORKDIR "$HOME"
 
-COPY ./ /opt/app-root/src
+COPY ./ "$HOME"
 
 # Install packages 
 RUN yarn install
 
 ENV NODE_ENV production
 
-# Drop the root user and make the content of /opt/app-root owned by user 1001
-RUN mkdir -p "$HOME" && chown -R 1001:0 "$APP_ROOT" && chmod -R ug+rwx "$APP_ROOT"
-WORKDIR "$HOME"
+
+# WORKDIR "$HOME"
 USER 1001
 CMD ["yarn", "run", "start"]
