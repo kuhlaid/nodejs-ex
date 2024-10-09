@@ -61,13 +61,15 @@ RUN INSTALL_PKGS="nodejs nodejs-nodemon nodejs-full-i18n yarn findutils tar whic
     rm -rf /mnt/rootfs/var/cache/* /mnt/rootfs/var/log/dnf* /mnt/rootfs/var/log/yum.*
 
 # Copy package.json and yarn.lock
-COPY package*.json ./
-COPY yarn.lock ./
+# COPY package*.json ./
+# COPY yarn.lock ./
+
+WORKDIR "$HOME"
+
+COPY ./ /opt/app-root/src
 
 # Install packages 
 RUN yarn install
-
-COPY ./ /opt/app-root/src
 
 ENV NODE_ENV production
 
