@@ -9,7 +9,7 @@
     "release": "standard-version -a",
     "openshift": "nodeshift --dockerImage=registry.access.redhat.com/ubi8/nodejs-20",
     "openshift:enable:trace": "nodeshift --deploy.env NODE_OPTIONS='--require ./tracing.js' --dockerImage=registry.access.redhat.com/ubi8/nodejs-20",
-    "start": "node .",
+    "start": "node . -p 8080",
     "dev": "node . | npx pino-pretty",
     "dev:debug": "DEBUG=* node . "
   },
