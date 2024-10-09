@@ -49,7 +49,8 @@ LABEL summary="$SUMMARY" \
       maintainer="SoftwareCollections.org <sclorg@redhat.com>" \
       help="For more information visit https://github.com/sclorg/s2i-nodejs-container"
 
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash 
+RUN curl -sL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo
+RUN yum install yarn 
 
 # nodejs-full-i18n is included for error strings
 RUN INSTALL_PKGS="nodejs nodejs-nodemon nodejs-full-i18n yarn findutils tar which" && \
