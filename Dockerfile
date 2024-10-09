@@ -18,7 +18,6 @@ ENV APP_ROOT=/opt/app-root \
     YARN_RUN=start \
     PLATFORM="el8" \
     NODEJS_VERSION=20 \
-    YARN_RUN=start \
     NAME=nodejs
 
 ENV SUMMARY="Minimal image for running Node.js $NODEJS_VERSION applications" \
@@ -49,6 +48,7 @@ LABEL summary="$SUMMARY" \
       maintainer="SoftwareCollections.org <sclorg@redhat.com>" \
       help="For more information visit https://github.com/sclorg/s2i-nodejs-container"
 
+# pull in yarn for package management (since NPM can cause headaches with OpenShift)
 RUN curl -sL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo
 
 # nodejs-full-i18n is included for error strings
@@ -60,17 +60,10 @@ RUN INSTALL_PKGS="nodejs nodejs-nodemon nodejs-full-i18n yarn findutils tar whic
     microdnf clean all && \
     rm -rf /mnt/rootfs/var/cache/* /mnt/rootfs/var/log/dnf* /mnt/rootfs/var/log/yum.*
 
-COPY ./s2i/bin/ /usr/libexec/s2i
-
-# Copy extra files to the image.
-COPY ./root/ /
-
-COPY ./ /
-
-WORKDIR "$APP_ROOT"
-CMD ["yarn", "run", "openshift"]
+COPY ./public /opt/app-root/src
 
 # Drop the root user and make the content of /opt/app-root owned by user 1001
 RUN mkdir -p "$HOME" && chown -R 1001:0 "$APP_ROOT" && chmod -R ug+rwx "$APP_ROOT"
 WORKDIR "$HOME"
 USER 1001
+CMD ["yarn", "run", "openshift"]
