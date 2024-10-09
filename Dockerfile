@@ -52,7 +52,7 @@ LABEL summary="$SUMMARY" \
 RUN curl -sL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo
 
 # nodejs-full-i18n is included for error strings
-RUN INSTALL_PKGS="nodejs nodejs-nodemon nodejs-full-i18n yarn findutils tar which" && \
+RUN INSTALL_PKGS="nodeshift nodejs nodejs-nodemon nodejs-full-i18n yarn findutils tar which" && \
     microdnf -y module disable nodejs && \
     microdnf -y module enable nodejs:$NODEJS_VERSION && \
     microdnf --nodocs --setopt=install_weak_deps=0 install $INSTALL_PKGS && \
