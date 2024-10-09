@@ -1,4 +1,6 @@
-FROM registry.stage.redhat.io/ubi8/ubi-minimal:8.10
+# FROM registry.stage.redhat.io/ubi8/ubi-minimal:8.10
+# might want to use httpd image instead
+FROM registry.stage.redhat.io/rhel9/httpd-24
 
 EXPOSE 8443
 
