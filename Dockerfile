@@ -49,10 +49,7 @@ LABEL summary="$SUMMARY" \
       maintainer="SoftwareCollections.org <sclorg@redhat.com>" \
       help="For more information visit https://github.com/sclorg/s2i-nodejs-container"
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
-RUN apt-get update && apt-get install -y yarn
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash 
 
 # nodejs-full-i18n is included for error strings
 RUN INSTALL_PKGS="nodejs nodejs-nodemon nodejs-full-i18n yarn findutils tar which" && \
