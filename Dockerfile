@@ -70,6 +70,8 @@ RUN yarn global add nodeshift
 
 COPY ./ /opt/app-root/src
 
+ENV NODE_ENV production
+
 # Drop the root user and make the content of /opt/app-root owned by user 1001
 RUN mkdir -p "$HOME" && chown -R 1001:0 "$APP_ROOT" && chmod -R ug+rwx "$APP_ROOT"
 WORKDIR "$HOME"
