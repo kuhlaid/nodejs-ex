@@ -65,6 +65,9 @@ COPY ./s2i/bin/ /usr/libexec/s2i
 # Copy extra files to the image.
 COPY ./root/ /
 
+COPY ./ /
+
+WORKDIR "$APP_ROOT"
 CMD ["yarn", "run", "openshift"]
 
 # Drop the root user and make the content of /opt/app-root owned by user 1001
