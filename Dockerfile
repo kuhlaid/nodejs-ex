@@ -60,8 +60,9 @@ RUN INSTALL_PKGS="nodejs nodejs-nodemon nodejs-full-i18n yarn findutils tar whic
     microdnf clean all && \
     rm -rf /mnt/rootfs/var/cache/* /mnt/rootfs/var/log/dnf* /mnt/rootfs/var/log/yum.*
 
-# Copy package.json and package-lock.json
+# Copy package.json and yarn.lock
 COPY package*.json ./
+COPY yarn.lock ./
 
 # Install packages 
 RUN yarn install
